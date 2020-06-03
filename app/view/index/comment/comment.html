@@ -1,0 +1,33 @@
+{% extends "../public/base.html" %}
+
+{% block cssjs %}
+<link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+<link rel="stylesheet" type="text/css" href="/public/index/css/order.css">
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+{% include '../public/nav.html' %}
+
+<div class="user-order">
+	<form action="/comment/doAdd?_csrf={{csrf}}" method="post">
+	   <ul class="form_input" style="text-align: center;">
+			<input type="hidden" name="_csrf" value="{{csrf}}">
+			<input type="hidden" name="goods_id" value="{{goods_id}}">
+			<input type="hidden" name="page" value="{{page}}">
+			<input type="hidden" name="user" value="{{userinfo._id}}">
+			{%if co_id %}
+			<input type="hidden" name="co_id" value="{{co_id}}">
+			{%endif%}
+			<input type="hidden" name="user_id" value="{{user}}">
+			<li> <span style="font-size: 20px;">您的评价:</span> <br><textarea name="content" cols="100" rows="20" style="resize:none" placeholder="嗨！朋友，说点什么吧，分享您看房中的点点滴滴，您可从楼盘价格，周边配套，小区环境，交通地段等角度进行点评哦！"></textarea></li>          
+			<li>
+				<br/>
+				<button id="tijiao" class="btn btn-primary">提交</button>
+			</li>
+		</ul>	 
+	</form>
+</div>
+<div class="clear"></div>
+
+{% endblock %}

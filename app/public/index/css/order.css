@@ -1,0 +1,224 @@
+/*order  订单页面*/
+.user-order {margin: 30px; font-size: 14px;color: #666;}
+.user-order .top-title{padding: 20px 0;}
+.user-order .top-title .filter-list {float: left;margin: 0;list-style-type: none;font-size: 16px;line-height: 1.25;}
+.user-order .top-title .filter-list li {  float: left; padding: 0 20px;border-left: 1px solid #e0e0e0;color: #757575;}
+.user-order .top-title .filter-list li:nth-of-type(1){border-left: none;}
+
+.user-order .order-list{margin:0}
+.user-order .order-list .table {width: 100%;max-width: 100%;margin-bottom: 20px;border-collapse: collapse;}	
+.user-order .order-list .table th {
+background: #EEEEEE;
+height: 60px;
+border: 1px solid #ddd;
+}
+.user-order .order-list .table td{
+
+height:100px;
+text-align: center;
+border: 1px solid #ddd;
+}
+.user-order .order-list .table td .col_pic{
+width:60px;
+height: 80px;
+
+line-height: 80px;
+float: left;
+}
+.user-order .order-list .table td .col_pic img{	
+width: 60px;
+}
+.user-order .order-list .table td .col_title{					
+float: left;
+margin-left: 60px;
+height: 80px;
+}
+.user-order .order-list .table td .col_title p{
+	text-align: left;
+}
+.user-order .order-list .table .order-summary{background: #eeeeee;padding: 25px 10px;text-align: left;border-bottom: 1px solid #eee;}
+.user-order .order-list .table .order-summary h3{padding:10px 0px;}
+.user-order .order-list .table .order-info{padding: 10px;}
+
+
+/*orderinfo  订单详情页面*/
+.order-info {margin:10px;font-size: 14px;color: #666;padding: 10px;}
+.order-info .title {margin: 10px ;}
+.order-info .title .subtitle {float: left; margin: 0 auto;font-size: 18px;font-weight: 400;color: #333;}
+.order-info .title .actions {float: right;}
+.order-info .title .actions .button{display: inline-block;
+  width: 158px;
+  height: 26px;
+  border: 1px solid #b0b0b0;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+  color: #b0b0b0;
+  }
+
+.order-info .detail .order-detail-core {padding: 10px 0;margin: 10px;}
+.order-info .detail .order-detail-core .order-status {margin: 25px auto;}
+.order-info .detail .order-detail-core .order-progress {height: 65px;margin-bottom: 25px;}
+.order-info .detail .order-detail-core .progress-list {width: 880px;height: 20px;margin: 0 auto;padding: 0;list-style-type: none;font-size: 12px;line-height: 20px;text-align: center;color: #424242;background-color: #eee;}
+.order-info .detail .order-detail-core .progress-list .step-first {border-top-left-radius: 20px;border-bottom-left-radius: 20px;}
+.order-info .detail .order-detail-core .progress-list .step-done {background-color: #0091ea;color: #fff;}
+.order-info .detail .order-detail-core .progress-list .step .info {margin-top: 15px;color: #757575;}
+.order-info .detail .order-detail-core .progress-list .step {float: left;width: 176px;height: 20px;}
+
+.order-info .detail .order-detail-core .order-delivery {padding: 0 20px 12px;margin: 15px 0 20px;border: 1px solid #0091ea;font-size: 12px;color: #757575;}
+
+/*收货信息*/
+.order-info .detail .order-detail-info {position: relative; _height: 120px; height: auto;min-height: 120px;padding: 6px 0 12px;margin-bottom: 30px;border-bottom: 1px solid #e0e0e0;}
+
+.btn {
+display: inline-block;
+*zoom: 1;
+*display: inline;
+width: 158px;
+height: 38px;
+padding: 0;
+margin: 0;
+border: 1px solid #b0b0b0;
+font-size: 14px;
+line-height: 38px;
+text-align: center;
+color: #b0b0b0;
+cursor: pointer;
+-webkit-transition: all .4s;
+transition: all .4s;
+}
+.btn-primary{
+  display: inline-block;
+  *zoom: 1;
+  *display: inline;
+  width: 158px;
+  height: 38px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #616161;
+  font-size: 14px;
+  line-height: 38px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+  background:#616161;
+}
+
+.order-info .detail .order-detail-info h3 {
+margin: 0 0 15px;
+font-size: 18px;
+font-weight: 400;
+color: #333;
+}
+.order-info .detail .order-detail-info .info-table th, .order-info .detail .order-detail-info .info-table td {
+padding: 3px 0;
+text-align: left;
+}
+.order-info .detail .order-detail-total .total-table {
+width: 255px;
+margin: 0 0 0 auto;
+color: #757575;
+}
+.order-info .detail .order-detail-total .total-table td {
+text-align: right;
+color: #ff6700;
+font-size: 28px;
+}
+
+  /* 分页 */
+ .pagination {
+display: inline-block;
+padding-left: 0;
+margin: 20px 0;
+border-radius: 4px;
+  }
+  .pagination > li {
+display: inline;
+  }
+  .pagination > li > a,
+  .pagination > li > span {
+position: relative;
+float: left;
+padding: 6px 12px;
+margin-left: -1px;
+line-height: 1.42857143;
+color: #428bca;
+text-decoration: none;
+background-color: #fff;
+border: 1px solid #ddd;
+  }
+  .pagination > li:first-child > a,
+  .pagination > li:first-child > span {
+margin-left: 0;
+border-top-left-radius: 4px;
+border-bottom-left-radius: 4px;
+  }
+  .pagination > li:last-child > a,
+  .pagination > li:last-child > span {
+border-top-right-radius: 4px;
+border-bottom-right-radius: 4px;
+  }
+  .pagination > li > a:hover,
+  .pagination > li > span:hover,
+  .pagination > li > a:focus,
+  .pagination > li > span:focus {
+color: #2a6496;
+background-color: #eee;
+border-color: #ddd;
+  }
+  .pagination > .active > a,
+  .pagination > .active > span,
+  .pagination > .active > a:hover,
+  .pagination > .active > span:hover,
+  .pagination > .active > a:focus,
+  .pagination > .active > span:focus {
+z-index: 2;
+color: #fff;
+cursor: default;
+background-color: #428bca;
+border-color: #428bca;
+  }
+  .pagination > .disabled > span,
+  .pagination > .disabled > span:hover,
+  .pagination > .disabled > span:focus,
+  .pagination > .disabled > a,
+  .pagination > .disabled > a:hover,
+  .pagination > .disabled > a:focus {
+color: #777;
+cursor: not-allowed;
+background-color: #fff;
+border-color: #ddd;
+  }
+  .pagination-lg > li > a,
+  .pagination-lg > li > span {
+padding: 10px 16px;
+font-size: 18px;
+  }
+  .pagination-lg > li:first-child > a,
+  .pagination-lg > li:first-child > span {
+border-top-left-radius: 6px;
+border-bottom-left-radius: 6px;
+  }
+  .pagination-lg > li:last-child > a,
+  .pagination-lg > li:last-child > span {
+border-top-right-radius: 6px;
+border-bottom-right-radius: 6px;
+  }
+  .pagination-sm > li > a,
+  .pagination-sm > li > span {
+padding: 5px 10px;
+font-size: 12px;
+  }
+  .pagination-sm > li:first-child > a,
+  .pagination-sm > li:first-child > span {
+border-top-left-radius: 3px;
+border-bottom-left-radius: 3px;
+  }
+  .pagination-sm > li:last-child > a,
+  .pagination-sm > li:last-child > span {
+border-top-right-radius: 3px;
+border-bottom-right-radius: 3px;
+  }
+

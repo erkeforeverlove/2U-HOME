@@ -1,0 +1,11 @@
+<div class="navigation ">
+        <div class="nav  center">
+            <ul class="clearfix" id="nav_list">
+                {%for itemTopNav in topNav %}						
+                    <li>
+                        <a href="{{itemTopNav.link}}" target="{% if itemTopNav.is_opennew==1%}_self{%else%} _blank{%endif%}">{{itemTopNav.title}}</a>
+                    </li>
+                {%endfor%}
+            </ul>
+        </div> 
+</div>

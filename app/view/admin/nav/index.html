@@ -1,0 +1,71 @@
+    {% include '../public/base_cssjs.html' %}
+    <script src="/public/admin/js/jqPaginator.js"></script>
+   
+    <div class="panel panel-default">              
+            <div class="panel-heading clear">
+                    <span>网站导航</span>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="th">
+                                <th>分类名称</th>                               
+                                <th>跳转地址</th> 
+                                <th>位置</th> 
+                                <th class="text-center">排序</th> 
+                                <th class="text-center">状态</th>                                           
+                            
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for nav in navArray %}
+                                        <tr>
+                                                <td>{{nav.title}}</td>  
+                                                <td>{{nav.link}}</td>
+                                                <td>
+                                                    {%if nav.position==1 %}
+                                                        顶部
+                                                    {% elif nav.position==2 %}
+                                                        中间
+                                                    {% else %}
+                                                        底部
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center">
+                                                    <span>
+                                                        {{nav.sort}}
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    {%if nav.status==1 %}
+                                                    <span class="glyphicon glyphicon-ok icon-color-green" />
+                                                    {%else%}
+                                                    <span class="glyphicon glyphicon-remove icon-color-red" />
+                                                    {%endif%}
+                                                </td>                                                                    
+                                                <td class="text-center">　
+                                                    <a href="/admin/nav/edit?id={{nav._id}}">修改</a>　
+                                                    <a class="delete" href="/admin/nav/delete?id={{nav._id}}">删除</a>
+                                                </td>
+                                            </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                    <div id="page" class="pagination fr"></div>
+                </div>
+            </div>
+    </div>
+    <script>
+        $('#page').jqPaginator({
+                totalPages: {{totalPages}},
+                visiblePages: 8,
+                currentPage:  {{page}},
+                onPageChange: function (num, type) {
+                    if(type=='change'){
+                        location.href="/admin/nav?page="+num;
+                    }
+                }
+        });
+   </script>

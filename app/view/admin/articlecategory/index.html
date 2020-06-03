@@ -1,0 +1,64 @@
+{% include '../public/base_cssjs.html' %}
+
+<div class="panel panel-default">              
+        <div class="panel-heading clear">
+            <span>文章分类列表</span> 
+            <a href="/admin/articleCategory/add" class="pull-right">增加文章分类</a>
+        </div>
+        <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="th">
+                    <th>分类名称</th>
+                    <th>分类图标</th>                                
+                    <th class="text-center">排序</th> 
+                    <th class="text-center">状态</th>                                           
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%for articleCategory in articleCategorys%}
+                            <tr>
+                                <td>{{articleCategory.title}}</td>  
+                                <td><span class="glyphicon {{articleCategory.cate_icon}}"></span></td>  
+                                <td class="text-center"><span onclick="app.editNum(this,'ArticleCategory','sort','{{articleCategory._id}}')">{{articleCategory.sort}}</span></td>
+                                <td class="text-center">
+                                    {%if articleCategory.status==1 %}
+                                            <span class="glyphicon glyphicon-ok icon-color-green" onclick="app.changeStatus(this,'ArticleCategory','status','{{articleCategory._id}}')" />
+                                    {%else%}
+                                            <span class="glyphicon glyphicon-remove icon-color-red" onclick="app.changeStatus(this,'ArticleCategory','status','{{articleCategory._id}}')" />
+                                    {%endif%}
+                                </td>                                                                    
+                                <td class="text-center">　
+                                    <a href="/admin/articleCategory/edit?id={{articleCategory._id}}">修改</a>　
+                                    <a class="delete" href="/admin/articleCategory/delete?id={{articleCategory._id}}">删除</a>
+                                </td>
+                            </tr>
+
+                            {%for subCate in articleCategory.items %}
+                                    <tr>
+                                        <td>-----{{subCate.title}}</td>  
+                                        <td><span class="glyphicon {{subCate.cate_icon}}"></span></td> 
+                                        <td class="text-center">
+                                            <span onclick="app.editNum(this,'ArticleCategory','sort','{{subCate._id}}')">{{subCate.sort}}</span>
+                                        </td>
+                                        <td class="text-center">
+                                                {%if articleCategory.status==1 %}
+                                                <span class="glyphicon glyphicon-ok icon-color-green" onclick="app.changeStatus(this,'ArticleCategory','status','{{subCate._id}}')" />
+                                                {%else%}
+                                                <span class="glyphicon glyphicon-remove icon-color-red" onclick="app.changeStatus(this,'ArticleCategory','status','{{subCate._id}}')" />
+                                                {%endif%}
+                                        </td>                                                                    
+                                        <td class="text-center">　
+                                            <a href="/admin/articleCategory/edit?id={{subCate._id}}">修改</a>　
+                                            <a class="delete" href="/admin/articleCategory/delete?id={{subCate._id}}">删除</a>
+                                        </td>
+                                    </tr>
+                            {%endfor%}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

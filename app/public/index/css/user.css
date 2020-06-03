@@ -1,0 +1,27 @@
+.user {width: 100%;height:auto;font-size: 14px;color:#666;}
+.user .user-info {margin: 10px;}
+.user .user-info .avatar {width:100px;height: 100px; border: 1px solid #e0e0e0;border-radius: 100px;margin: 20px auto;}
+.user .user-info .username {margin: 0;font-size: 24px;font-weight: 400;color: #616161;}
+.user .user-info .tip {margin: 10px ;color: #b0b0b0;}
+.user .user-info .phone {display: block;text-align: left;}
+.user .user-info .link {font-size: 20px;color:#c9184d;text-decoration: none;}
+.user .user-info .link:hover {color: #333333;}
+.user .user-info .collect_comment {font-size: 14px;color:#b0b0b0; margin: 40px auto;}
+.user .user-info .collect_comment .collection {padding: 5px 25px;border: 1px solid #e0e0e0;margin: 5px;}
+.user .user-info .collect_comment .collection:hover {background-color: #eeeeee;border: 1px solid #616161;}
+.user .user-info .collect_comment .comment {padding: 5px 25px;border: 1px solid #e0e0e0;margin: 5px;}
+.user .user-info .collect_comment .comment:hover {background-color: #eeeeee;border: 1px solid #616161;}
+
+.user .user-order {border-top: 1px solid #e0e0e0;height: 160px;margin: 0 auto;width: 80%;}
+.user .user-order .order-status1{float: left; text-align: center;line-height: 80px;width: 100px;height: 80px; border: 1px solid #e0e0e0;margin: 40px;}
+.user .user-order .order-status1:hover {background-color: #eeeeee;border: 1px solid #616161;}
+.user .user-order .order-status2{float: left; text-align: center;line-height: 80px;width: 100px;height: 80px; border: 1px solid #e0e0e0;margin: 40px;}
+.user .user-order .order-status2:hover {background-color: #eeeeee;border: 1px solid #616161;}
+.user .user-order .order-status3{float: left; text-align: center;line-height: 80px;width: 100px;height: 80px; border: 1px solid #e0e0e0;margin: 40px;}
+.user .user-order .order-status3:hover {background-color: #eeeeee;border: 1px solid #616161;}
+.user .user-order .order-status4{float: left; text-align: center;line-height: 80px;width: 100px;height: 80px; border: 1px solid #e0e0e0;margin: 40px;}
+.user .user-order .order-status4:hover {background-color: #eeeeee;border: 1px solid #616161;}
+.user .user-order .order-status5{float: left; text-align: center;line-height: 80px;width: 100px;height: 80px; border: 1px solid #e0e0e0;margin: 40px;}
+.user .user-order .order-status5:hover {background-color: #eeeeee;border: 1px solid #616161;}
+
+.clearfix:before, .clearfix:after {content: " ";display: table;}

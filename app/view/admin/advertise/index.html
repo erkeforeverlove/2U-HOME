@@ -1,0 +1,71 @@
+{% include '../public/base_cssjs.html' %} 
+<div class="panel panel-default">              
+        <div class="panel-heading">
+            轮播图列表
+        </div>
+        <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="th">
+                    <th>名称</th>
+                    <th>分类</th>
+                    <th>图片</th>
+                    <th>跳转地址</th>    
+                    <th>级别</th>    
+                    <th class="text-center">排序</th> 
+                    <th class="text-center">状态</th>                                             
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>    
+                <tbody>
+                    {% for ad in ads %}
+                        <tr>
+                                <td>{{ad.title}}</td>   
+                                <td>
+                                    {% if ad.type==1 %}
+                                            网站
+                                    {% elseif ad.type==2 %}
+                                           App
+                                    {% elseif ad.type==3 %}
+                                        小程序
+                                    {% else %}
+                                            未知类型
+                                    {% endif %}
+                                </td>   
+                                <td><img class="pic" src="{{ad.advertise_img}}"  width="200"/></td>
+                                <td>{{ad.link}}</td>
+                                <td>
+                                        {% if ad.level==1 %}
+                                                一级广告
+                                        {% elseif ad.level==2 %}
+                                                二级广告
+                                        {% elseif ad.level==3 %}
+                                                三级广告
+                                        {% else %}
+                                                其他等级
+                                        {% endif %}
+                                    </td>
+                                <td class="text-center">
+                                    
+                                        {{ad.sort}}
+                                    
+                                </td>
+                                <td class="text-center">
+                                        {%if ad.status==1 %}
+                                        <span class="glyphicon glyphicon-ok icon-color-green"  />
+                                        {%else%}
+                                        <span class="glyphicon glyphicon-remove icon-color-red" />
+                                        {%endif%}
+                                </td>                                                                    
+                                <td class="text-center">　
+                                    <a href="/admin/advertise/edit?id={{ad._id}}">修改</a>　
+                                    <a href="/admin/advertise/delete?id={{ad._id}}">删除</a>
+                                </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

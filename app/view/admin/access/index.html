@@ -1,0 +1,61 @@
+{% include '../public/base_cssjs.html' %} 
+<div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="th">
+                    <th>模块名称</th>
+                    <th>节点类型</th>
+                    <th>操作名称</th>
+                    <th>操作地址</th>
+                    <th>排序</th>
+                    <th>描述</th>
+                    <th class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in modules %}
+                <tr>
+                    <td>{{module.module_name}}</td>
+                    <td>
+                        {% if module.type==1 %}
+                            模块
+                        {% elif module.type==2 %}
+                            菜单
+                        {% else %}
+                            操作
+                        {% endif %}
+                    </td>
+                    <td>{{ module.action_name }}</td>
+                    <td>{{ module.action_url }}</td>
+                    <td>{{ module.sort }}</td>
+                    <td>{{ module.description }}</td>
+                    <td class="text-center">
+                        <a href="/admin/access/edit?id={{ module._id }}">修改</a>
+                    </td>
+                </tr>
+                    {% for item in module.items %}
+                    <tr>
+                        <td  item.module_name}}</td>
+                        <td>
+                            {% if item.type==1 %}
+                            模块
+                            {% elif item.type==2 %}
+                            菜单
+                            {% else %}
+                            操作
+                            {% endif %}
+                        </td>
+                        <td>{{ item.action_name }}</td>
+                        <td>{{ item.action_url }}</td>
+                        <td>{{ item.sort }}</td>
+                        <td>{{ item.description }}</td>
+                        <td class="text-center">
+                            <a href="/admin/access/edit?id={{ item._id }}">修改</a>
+                            <a class="delete" href="/admin/access/delete?id={{ item._id }}">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+</div>

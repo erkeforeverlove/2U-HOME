@@ -1,0 +1,118 @@
+{% include '../public/base_cssjs.html' %}
+<script src="/public/admin/js/jqPaginator.js"></script>
+
+<div class="panel panel-default">   
+        <div class="panel-heading clear">
+                <span>房屋商品列表</span> 
+                {%if noshow == 1 %}
+                {%else%}
+                <a href="/admin/goods/add" class="pull-right">增加房屋商品</a>
+                {%endif%}
+        </div>
+        {%if noshow == 1 %}
+        {%else%}
+        <div class="panel-body">
+            <form role="form" class="form-inline" method="get" action="/admin/goods">
+                <div class="form-group">
+                    <label for="name">输入关键词</label>
+                    <input type="text" class="form-control" value="{{keyword}}" id="name" name="keyword" placeholder="请输入名称">
+                </div>
+    
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">开始搜索</button>
+                </div>
+            </form>
+        </div>                     
+        {%endif%}           
+        
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>                                   
+                        <tr class="th" >
+                            <th>房屋类型</th>
+                            <th>房屋名称</th>
+                            <th>房屋户型</th>  
+                            <th>房屋建筑面积</th>  
+                            <th>开盘日期</th>                        
+                            <th>上架</th>
+                            <th>热门楼盘</th>
+                            <th>热门二手房</th>
+                            <th>热门租房</th>                    
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for item in goodsArray%}
+                            <tr>                             
+                                {% for cate in cateArray %}           
+                                    <td {%if item.cate_id.toString()!=cate._id.toString() %} style="display:none" {% endif %} >{{cate.title}}</td>   
+                                {% endfor %}
+                                <td>{{item.title}}</td>
+                                <td>{{item.house_huxing}}</td>
+                                <td>{{item.space}}</td>
+                                <td>{{item.open_time}}</td>  
+                                  
+                                <td  class="text-center">
+                                    {%if item.status==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green" />
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" />
+                                    {%endif%}
+                                </td>                                           
+                                <td  class="text-center">
+                                    {%if item.is_best==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green" />
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" />
+                                    {%endif%}
+                                </td> 
+                                <td  class="text-center">
+                                    {%if item.is_new==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green" />
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" />
+                                    {%endif%}
+                                </td> 
+                                <td  class="text-center">
+                                    {%if item.is_hot==1 %}
+                                    <span class="glyphicon glyphicon-ok icon-color-green" />
+                                    {%else%}
+                                    <span class="glyphicon glyphicon-remove icon-color-red" />
+                                    {%endif%}
+                                </td> 
+                                {%if noshow == 1 %}
+                                <td class="text-center">
+                                    <a href="/admin/goods/look?id={{item._id}}">显示详细信息</a>　　
+                                </td>
+                                {%else%}
+                                <td class="text-center">
+                                    <a href="/admin/goods/edit?id={{item._id}}">修改</a>　　
+                                    <a  class="delete" href="/admin/goods/delete?goods_id={{item._id}}">删除</a>
+                                </td>
+                                {%endif%}    
+                                
+                            </tr>       
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div id="page" class="pagination fr">
+                    
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+        $('#page').jqPaginator({
+                    totalPages: {{totalPages}},
+                    visiblePages: 8,
+                    currentPage:  {{page}},
+                    onPageChange: function (num, type) {
+                        if(type=='change'){
+                        location.href="/admin/goods?page="+num+"&keyword={{keyword}}";
+                        }
+                    }
+        });
+
+</script>

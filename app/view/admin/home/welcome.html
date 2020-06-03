@@ -1,0 +1,134 @@
+<script src="/public/admin/js/g2.min.js"></script>
+
+<script src="/public/admin/js/countUp.js"></script>
+
+
+<div style="text-align: center">
+    <div >
+        <div  style='display: inline-block; width:150;height: 150;background-color:#eeeeee;margin: 20'>
+            <p  >客户总数</p>
+            <p id="item1" style="font-size: 38px;color:red;" ></p>
+        </div>
+        <div  style='display: inline-block; width:150;height: 150;background-color:#eeeeee;margin: 20'>
+            <p  >房源总数</p>
+            <p id="item2" style="font-size: 38px;color:orange;" ></p>
+        </div>
+        <div  style='display: inline-block; width:150;height: 150;background-color:#eeeeee;margin: 20'>
+            <p  >管理员总数</p>
+            <p id="item3" style="font-size: 38px;color:mediumslateblue;" ></p>
+        </div>
+        <div  style='display: inline-block; width:150;height: 150;background-color:#eeeeee;margin: 20'>
+            <p  >反馈总数</p>
+            <p id="item4" style="font-size: 38px;color:seagreen;" ></p>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 170px;margin-top: 50px;">
+    <div id="c1" style='display: inline-block;'></div>
+    <div id="c" style='display: inline-block;'></div>
+</div>
+
+<script>
+    var options = {
+        useEasing: true, 
+        useGrouping: true, 
+        separator: ',', 
+        decimal: '.', 
+    };
+    var demo1 = new CountUp('item1', 0, {{totalNum}}, 0, 2.5, options);
+    var demo2 = new CountUp('item2', 0, {{totalHouse}}, 0, 2.5, options);
+    var demo3 = new CountUp('item3', 0, {{totalAdmin}}, 0, 2.5, options);
+    var demo4 = new CountUp('item4', 0, {{totalkefu}}, 0, 2.5, options);
+    demo1.start();
+    demo2.start();
+    demo3.start();
+    demo4.start();
+    
+    
+    //柱状图
+    const data = [
+        { genre: '新房', sold: {{newHouse}} },
+        { genre: '二手房', sold: {{ershouHouse}} },
+        { genre: '租房', sold: {{zuHouse}} },
+        { genre: '商务写字楼', sold: {{shangpuHouse}} },
+        ]; // G2 对数据源格式的要求，仅仅是 JSON 数组，数组的每个元素是一个标准 JSON 对象。
+    // Step 1: 创建 Chart 对象
+    const chart = new G2.Chart({
+        container: 'c', // 指定图表容器 ID
+        width : 400, // 指定图表宽度
+        height : 300 // 指定图表高度
+        });
+    // Step 2: 载入数据源
+    chart.source(data); 
+    // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+    chart.interval().position('genre*sold').color('genre')
+    // Step 4: 渲染图表
+    chart.render();
+    //折线图
+    //用户增长
+    var userData = [{
+    year: '1月',
+    value: {{date[0]}}
+    }, {
+    year: '2月',
+    value: {{date[1]}}
+    }, {
+    year: '3月',
+    value: {{date[2]}}
+    }, {
+    year: '4月',
+    value: {{date[3]}}
+    }, {
+    year: '5月',
+    value: {{date[4]}}
+    }, {
+    year: '6月',
+    value: {{date[5]}}
+    }, {
+    year: '7月',
+    value: {{date[6]}}
+    }, {
+    year: '8月',
+    value: {{date[7]}}
+    }, {
+    year: '9月',
+    value: {{date[8]}}
+    },{
+    year: '10月',
+    value: {{date[9]}}
+    },{
+    year: '11月',
+    value: {{date[10]}}
+    },{
+    year: '12月',
+    value: {{date[11]}}
+    }];
+    
+    var chart1 = new G2.Chart({
+        container: 'c1',
+        height: 300,
+        width:400
+    });
+    chart1.source(userData);
+    chart1.scale('value', {
+    min: 0
+    });
+    chart1.scale('year', {
+    range: [0, 1]
+    });
+    chart1.tooltip({
+    crosshairs: {
+        type: 'line'
+    }
+    });
+    chart1.line().position('year*value');
+    chart1.point().position('year*value').size(4).shape('circle').style({
+        stroke: '#fff',
+        lineWidth: 1
+    });
+    chart1.render(); 
+
+</script>
+
+  
+ 

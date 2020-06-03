@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="/public/index/css/login.css" />
+		<script src="/public/index/js/jquery-1.10.1.js"></script>		
+	</head>
+	<body class="login_page">
+		<div class="top">
+				<div class="logo">
+					<span class="ml40">2UHOME</span>
+				</div>
+		</div>
+		
+		<div class="form">
+				<div class="login">			
+					<div class="login_center">
+						<div class="login_top">
+							<div class="left fl">登录</div>
+							<div class="right fr"><a href="/" target="_self">暂不登录</a></div>
+							<div class="right fr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div class="right fr"><a href="/register" target="_self">立即注册</a></div>
+							<div class="clear"></div>
+							<div class="line center"></div>
+						</div>
+						<div class="login_main center">
+							<input type="hidden" name="returnUrl" id="returnUrl" value="{{returnUrl}}" />
+							<div class="username">用户名：<input class="shurukuang" id="username" type="text" name="username" placeholder="请输入你的手机号"/></div>
+							<div class="username">密　码：<input class="shurukuang"  id="password"  type="password" name="password" placeholder="请输入你的密码"/></div>
+							<div class="username">
+								<div class="left fl">验证码：<input class="yanzhengma" id="identify_code" type="text" name="identify_code" placeholder="请输入验证码"/></div>
+								<div class="right fl">
+									<img  id="identify_code_img" src="/verify"  title="看不清？点击刷新" onclick="javascript:this.src='/verify?mt='+Math.random()">				
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="login_submit">
+							<button class="submit" id="doLogin">立即登录</button>
+						</div>
+					</div>
+				</div>
+		</div>
+		
+		<script>
+				
+			$(function(){
+				$("#doLogin").click(function(e){
+					var returnUrl=$('#returnUrl').val();
+					var username=$('#username').val();
+					var password= $('#password').val();
+					var identify_code= $('#identify_code').val();					
+					var reg =/^[\d]{11}$/;
+					if(!reg.test(username)){
+						alert('手机号输入错误');
+						return false;
+					}
+					if(identify_code.length<4){
+						alert('验证码长度不合法');
+						return false;
+					}
+					//ajax请求
+					$.post('/login/doLogin',{username:username,identify_code:identify_code,password:password},function(response){
+							console.log(response);
+							if(response.success==true){								
+								location.href=returnUrl;								
+							}else{
+								$("#identify_code_img").attr('src','/verify?mt='+Math.random());
+								alert(response.msg);
+							}						
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

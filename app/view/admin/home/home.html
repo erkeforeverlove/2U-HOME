@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2U-Home后台管理系统</title>
+</head>
+<body>
+    {% include '../public/base_cssjs.html' %} 
+    {% include '../public/base_header.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                {% include '../public/base_leftmenu.html' %}
+            </div>
+            <div class="col-sm-10">
+                <iframe name="rightMain" id="rightMain" src="/admin/welcome" frameborder="false" scrolling="auto" width="100%" height="100%">                  
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+    //设置iframe的高度
+        $(function(){
+            app.resizeIframe();
+        })
+
+        $(window).resize(function(){
+            app.resizeIframe();
+        })
+    </script>
+</body>

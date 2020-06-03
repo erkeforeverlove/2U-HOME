@@ -1,0 +1,60 @@
+'use strict';
+
+var BaseController =require('./base.js');
+
+class NavController extends BaseController {
+     
+      async index() {
+        var page=this.ctx.request.query.page || 1;
+        var pageSize=8;       
+        //获取当前数据表的总数量
+        var totalNum=await this.ctx.model.Nav.find({}).count();
+        //分页查询
+        var result=await this.ctx.model.Nav.find({}).skip((page-1)*pageSize).limit(pageSize).sort({ sort:1 });
+         await this.ctx.render('admin/nav/index',{
+           navArray:result,
+           totalPages:Math.ceil(totalNum/pageSize),
+           page:page
+         });
+      }     
+    
+      async add() {    
+        await this.ctx.render('admin/nav/add');
+      } 
+
+      async doAdd() {
+        var nav=new this.ctx.model.Nav(this.ctx.request.body)
+        await nav.save();   //注意
+        await this.success('/admin/nav','增加导航成功');
+      } 
+
+      async edit() {
+        var id=this.ctx.query.id;
+        var result=await this.ctx.model.Nav.find({"_id":id});
+        await this.ctx.render('admin/nav/edit',{
+          list:result[0],
+          prevPage:this.ctx.state.lastPage
+        });
+      } 
+
+      async doEdit() {
+        var _id=this.ctx.request.body._id;       
+        var prevPage=this.ctx.request.body.prevPage;       
+        await this.ctx.model.Nav.updateOne({"_id":_id},this.ctx.request.body)
+         await this.success(prevPage,'编辑导航成功');     
+      } 
+
+
+      async delete(){
+        const {ctx}=this
+        var id=ctx.request.query.id
+        var result=await this.ctx.model.Nav.deleteOne({"_id":id});
+        if(result){
+            await this.success(ctx.locals.lastPage,'导航删除成功')
+        }else{
+            await this.fail(ctx.locals.lastPage,'导航删除失败')
+        }
+      }
+}
+
+module.exports = NavController;

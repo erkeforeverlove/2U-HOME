@@ -1,0 +1,192 @@
+{% extends "../public/base.html" %}
+
+{% block cssjs %}
+<link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.min.css">
+    <script src="/public/index/js/jquery-1.10.1.js"></script>		
+    <script src="/public/index/js/base.js"> </script>
+    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/index/css/swiper.min.css">
+    <script src="/public/index/js/swiper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/index/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/font-awesome.min.css">
+    <script type="text/javascript" src="/public/index/js/nav.js"></script>
+    <style type="text/css">
+        body{
+            padding:0;
+            margin:0;
+            background: #f2f2f2;
+        }
+        .wrap .line{
+            height: 500px;
+            width: 188px;
+            margin:0 auto;
+		}
+		.detail{
+            margin-top: 0;
+        }
+		.info-mod{
+            border-radius: 15px;
+            background-color: rgba(94, 5, 238, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .word{
+            border-radius: 5px;
+            background-color: rgba(238, 5, 141, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+            line-height: 20px;
+        }
+        .info-img{
+            border-radius: 50%;
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .panel{
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+		}
+    </style>
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+{% include '../public/nav.html' %}
+
+<div class="detail">        
+	<ul class="detail_list clearfix">		
+		<li class="ft">用户评论</li>			
+	</ul>
+	<div class="detail_info">
+		<div class="rev">
+			<ul class="revlist">
+				{%for co in comment %}
+				{%for it in co.items %}    
+				<div class="info-mod">
+					<span class="author" style="color: skyblue;">房屋名称：</span>
+					<a href="/goodsinfo?id={{goods_id}}&&user={{userinfo._id}}">
+						<span class="author" style="color: hotpink;">{{title}}</span>
+					</a>
+				</div>           
+				<li>
+					{%if it.img%}
+						<div class="info-img">
+							<a href="/user/userinfo?id={{it._id}}">
+							<img src="{{it.img}}" style="border-radius: 50%;" width="80px" height="80px">
+							</a>
+						</div>
+                        {%else%}
+                        <div class="info-img">
+                            <a href="/user/userinfo?id={{it._id}}">
+                            <img src="/public/index/image/未上传.jpg" style="border-radius: 50%;" width="80px" height="80px">
+                            </a>
+                        </div>
+                    {%endif%}
+					<div class="info-mod">
+						<a href="/user/userinfo?id={{it._id}}">
+							<span class="author">{{it.nicheng}}</span>
+						</a>
+					</div>
+					<br>
+					<div class="word">
+						<span class="words">{{co.content}}</span>
+					</div>
+					<div class="panel">
+						<span class="date">{{helper.formatTime(co.add_time)}}</span>
+						
+						<div class="pzc">
+							<a href="/pingjia?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=pingjia" class="dianping">
+								<div class="glyphicon glyphicon-comment" style="color: #333333;"></div>
+								<em>{{co.ping}}</em>
+							</a>      
+							<a href="/dianzan/add?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=pingjia" class="dianzan">                                                        
+								<div class="glyphicon glyphicon-thumbs-up"></div>                
+								<em>{{co.zan}}</em>    
+							</a>
+						</div>
+					</div>
+				</li>                              
+				{%endfor%}
+				{%endfor%}
+			</ul>
+		</div>
+	</div>
+	<hr style="background-color: #333333;height: 1px;border: none;">
+	<div class="detail_info">
+		<div class="rev">
+			<ul class="revlist">
+				{%for pingjia in pingjia_comment.items %}         
+				<li>
+					{%for it in user %} 
+					{%if pingjia.user_id.toString() == it._id.toString() %}		
+					{%if it.img%}
+						<div class="info-img">
+							<a href="/user/userinfo?id={{it._id}}">
+							<img src="{{it.img}}" style="border-radius: 50%;" width="80px" height="80px">
+							</a>
+						</div>
+                    {%else%}
+                        <div class="info-img">
+                            <a href="/user/userinfo?id={{it._id}}">
+                            <img src="/public/index/image/未上传.jpg" style="border-radius: 50%;" width="80px" height="80px">
+                            </a>
+                        </div>
+                    {%endif%}
+					<div class="info-mod">
+						<a href="/user/userinfo?id={{pingjia.user_id}}">						
+							<span class="author">{{it.nicheng}}</span>&nbsp;						
+						</a>
+						<span class="author" style="color: green;">回复：</span>&nbsp;
+					</div>
+					{%endif%}
+					{%endfor%}
+					<br>
+					<div class="word">
+						{%for co in co %} 
+						{%if pingjia._id.toString() == co._id.toString() %}
+						<span class="words">{{co.content}}</span>
+						{%endif%}
+						{%endfor%}
+					</div>
+					<div class="panel">
+						<span class="date">{{helper.formatTime(pingjia.add_time)}}</span>
+						
+						<div class="pzc">
+							<a href="/pingjia?id={{pingjia.goods_id}}&&user={{userinfo._id}}&&co_id={{pingjia._id}}&&page=pingjia" class="dianping" target="view_window">
+								<div class="glyphicon glyphicon-comment" style="color: #333333;"></div>
+								<em>{{pingjia.ping}}</em>
+							</a>      
+							<a href="/dianzan/add?id={{pingjia.goods_id}}&&user={{userinfo._id}}&&co_id={{pingjia._id}}&&page=pingjia" class="dianzan">                                                        
+								<div class="glyphicon glyphicon-thumbs-up"></div>                
+								<em>{{pingjia.zan}}</em>    
+							</a>
+						</div>
+					</div>
+				</li>                              
+				{%endfor%}
+			</ul>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="basic_pingjia">
+	<div class="placeordrer">
+		<input class="addPingjia" type="button" name="addPingjia" id="addPingjia" value="我要回复" goods_id="{{goods_id}}" user="{{userinfo._id}}" co_id="{{co_id}}"/>
+	</div>
+</div>
+<script>
+	$(function(){
+            $('#addPingjia').click(function(){
+                var goods_id=$('#addPingjia').attr('goods_id');
+				var user=$('#addPingjia').attr('user');
+				var co_id=$('#addPingjia').attr('co_id');  
+                location.href="/comment?goods_id="+goods_id+"&&userinfo="+user+"&&page=pingjia&&co_id="+co_id;
+            })
+        })
+</script>
+{% endblock %}

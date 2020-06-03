@@ -1,0 +1,128 @@
+{% extends "../public/base.html" %}
+{% block cssjs%}
+
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    
+    <script src="/public/index/js/jquery-1.10.1.js"></script>		
+    <script src="/public/index/js/base.js"> </script>
+    <link rel="stylesheet" href="/public/index/css/swiper.min.css">
+  
+    <script src="/public/index/js/swiper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/index/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/font-awesome.min.css">
+    <script type="text/javascript" src="/public/index/js/nav.js"></script>
+
+    
+   
+    <style type="text/css">
+        body{
+            padding:0;
+            margin:0;
+            background: #f2f2f2;
+        }
+        .wrap .line{
+            height: 500px;
+            width: 188px;
+            margin:0 auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <!-- 导航 -->
+    {% include '../public/nav.html'%}
+    
+    {% include './banner.html' %}
+    
+  
+    <div class="category_item">
+        <h3 class="title">- 热 门 楼 盘 -</h3>
+        <div class="content">
+            {%for goods in goodsBest%}
+                <div class="item fl">
+                    <div class="tag"><span style="background:#fff"></span></div>
+                    <div class="good_img">
+                        <a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">
+                            <img src="{{goods.goods_img}}">
+                        </a>
+                    </div>
+                    <div class="title"><a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">{{goods.title}}</a></div>
+                    <div class="price">{{goods.price}}</div>
+                    {%if goods.cate_id == "5e75bcf95b19194798cf9ce3" %}
+						<div style="padding-top: 20px;">开盘日期：{{goods.open_time}}</div>
+					{%else%}
+						<div style="padding-top: 20px;">上架日期：{{goods.open_time}}</div>
+					{%endif%}
+                </div>
+            {%endfor%}
+            <div class="clear"></div>
+        </div>
+    </div>
+   
+ 
+    <div class="category_item">
+        <h3 class="title">- 热 门 二 手 房 -</h3>
+        <div class="content">
+            {% for goods in goodsNew%}
+            <div class="item fl">
+                <div class="tag"><span style="background:#fff"></span></div>
+                <div class="good_img">
+                    <a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">
+                        <img src="{{goods.goods_img}}">
+                    </a>
+                </div>
+                <div class="title"><a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">{{goods.title}}</div>
+                <div class="price">{{goods.price}}</div>
+                {%if goods.cate_id == "5e75bcf95b19194798cf9ce3" %}
+					<div style="padding-top: 20px;">开盘日期：{{goods.open_time}}</div>
+				{%else%}
+					<div style="padding-top: 20px;">上架日期：{{goods.open_time}}</div>
+				{%endif%}
+            </div>
+            {%endfor%}
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    
+    <div class="category_item">
+        <h3 class="title">- 热 门 租 房 -</h3>
+        <div class="content">
+            {% for goods in goodsHot%}
+            <div class="item fl">
+                <div class="tag"><span style="background:#fff"></span></div>
+                <div class="good_img">
+                    <a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">
+                        <img src="{{goods.goods_img}}">
+                    </a>
+                </div>
+                <div class="title"><a href="/goodsinfo?id={{goods._id}}&&user={{userinfo._id}}">{{goods.title}}</div>
+                <div class="price">{{goods.price}}元</div>
+                {%if goods.cate_id == "5e75bcf95b19194798cf9ce3" %}
+					<div style="padding-top: 20px;">开盘日期：{{goods.open_time}}</div>
+				{%else%}
+					<div style="padding-top: 20px;">上架日期：{{goods.open_time}}</div>
+				{%endif%}
+            </div>
+            {%endfor%}
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="leftNav-item">
+        <ul>
+            <li title="在线客服">
+                <i class="fa fa-comments-o"></i>             
+                <a href="/kefu/index?id={{userinfo._id}}"class="rota">问题反馈</a>
+                
+            </li> 
+            <li lay-data="img" data-fooc="/public/index/image/二维码.png">
+                <i class="fa fa-money"></i><a href="javascript:;" class="rota">二维码</a>
+            </li> 
+            <li title="返回顶部" class="for-top">
+                <i class="fa fa-arrow-up"></i>
+                <a href="javascript:;" class="rota">去顶部</a>
+            </li>
+        </ul>
+    </div>
+    
+
+{% endblock %}

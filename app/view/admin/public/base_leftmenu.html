@@ -1,0 +1,28 @@
+<div class="aside">
+    <!--
+        遍历
+            模块：checked == true 并且 权限type == 1(模块)  或者  超级管理员is_super==1 并且 权限type == 1(模块)
+                菜单：checked ==true 权限type!=3 （不是操作） 或者  超级管理员is_super==1 并且 权限type != 3
+    -->
+    <ul class='asideul'>    
+
+        {% for access1 in authList %}
+            <li>
+                {% if (access1.checked and access1.type==1)or(userinfo.is_super==1 and access1.type==1) %}
+                <h4>{{access1.module_name}}</h4>
+                {% endif %}
+                <ul class="text-center">
+                    {% for access2 in access1.items %} 
+                        {% if (access2.checked and access2.type!=3) or (userinfo.is_super==1 and access2.type!=3) %}
+                        <li  class="list-group-item"> 
+                            <a href="{{access2.action_url}}" target="rightMain"> 
+                                {{access2.module_name}}
+                            </a>
+                        </li> 
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li> 
+       {% endfor %}
+    </ul>
+</div>

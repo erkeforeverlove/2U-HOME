@@ -1,0 +1,82 @@
+{% extends "../public/base.html" %}
+{% block cssjs%}
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <script src="/public/index/js/jquery-1.10.1.js"></script>
+    <script src="/public/index/js/cart.js"> </script>
+{% endblock %}
+{% block header%}
+    <div class="cart_header center">
+        <a href="./index.html" target="_blank"><div class="logo fl"></div></a>
+        <div class="wdgwc fl ml40">我的收藏</div>
+        <div class="dlzc fr">
+            <ul>
+               {%if userinfo and userinfo.phone %}
+                    <li class="userinfo">
+                        <a href="/user/userinfo?id={{userinfo._id}}">{{userinfo.phone}}</a>
+                        <i class="i"></i>
+                            <li><a href="/login/loginOut">退出登录</a></li>
+                    </li>
+                {%else%}
+                    <li><a href="javascript:void(0)" id="loginButton" target="_blank">登录</a></li>
+                    <li>|</li>
+                    <li><a href="/register" target="_blank" >注册</a></li>
+                {%endif%}
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock%}
+{% block content %}
+    {%if collection and collection.length>0 %}
+    <div class="cart_list">
+            <table class="table">
+                <tr class="th">
+                    <th>房屋名称</th>
+                    <th>房屋类型</th>
+                    <th>房屋图片</th>
+                    <th>价格</th>
+                    <th>详细信息</th>
+                    <th>操作</th>
+                </tr>
+                {%for co in collection %}
+                {%for it in co.items %}
+                <tr class="table_cart_list">
+                        <td>
+                            {{it.title}}
+                        </td>    
+                        {% for ca in cate %}           
+                            <td {%if it.cate_id.toString()!=ca._id.toString() %} style="display:none" {% endif %} >{{ca.title}}</td>   
+                        {% endfor %}         
+                        <td>
+                            <div class="col_pic"><img src="{{it.goods_img}}" /></div>
+                        </td>
+                        <td class="price">                         
+                            {{it.price}}
+                        </td>
+                        <td><a href="/goodsinfo?id={{co.goods_id}}&&user={{userinfo._id}}">详细信息</a></td>
+                        <td>
+                            <span><a class="delete" href="/removeCollection?id={{co._id}}&&user={{userinfo._id}}"> 删除</a></span>
+                        </td>
+                </tr>
+             
+                {%endfor%}
+                {%endfor%}
+            </table>
+        <div class="cart_total">
+            <div class="tips fl ml20">
+                <ul>
+                    <li><a href="/"><-继续浏览</a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% else %}
+        <div style="min-height: 400px;">
+            <p style="text-align:center; padding:50px;">收藏夹一无所有٩(๑´0`๑)۶！！</p>           
+            <h3><a href="/">快去收藏吧</a></h3>
+        </div>
+    {%endif%}
+
+{% endblock %}  

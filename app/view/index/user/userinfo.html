@@ -1,0 +1,122 @@
+{% extends "../public/base.html" %}
+{% extends "../public/base.html" %}
+
+{% block cssjs%}
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/user.css">
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.min.css">
+    <style>
+        .detail{
+            margin-top: 0;
+        }
+        .user-info{
+            background-color: rgba(10, 155, 99, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .info-mod{
+            border-radius: 15px;
+            background-color: rgba(94, 5, 238, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .word{
+            border-radius: 5px;
+            background-color: rgba(238, 5, 141, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+            line-height: 20px;
+        }
+        .info-img{
+            border-radius: 50%;
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .panel{
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+    {% include '../public/nav.html'%}
+    <div class="user">
+        <div class="user-info">
+            {%for user in user%}
+                {%if user.img %}
+                <h2 class="phone">用户头像：<img class="pic" src="{{user.img}}"  style="border-radius:50%;" width="100px" height="100px"/></h2> 
+                {%else%}
+                <h2 class="phone">用户头像：<img src="/public/index/image/未上传.jpg" style="border-radius: 50%;" width="80px" height="80px"></h2> 
+                {%endif%}
+                <h2 class="phone">用户姓名：{{user.name}}</h2>
+                <h2 class="phone">用户昵称：{{user.nicheng}}</h2>
+                <h2 class="phone">用户所在地：{{user.area}}</h2>
+                <h2 class="phone">用户座右铭：{{user.Motto}}</h2>
+                <h2 class="phone">用户电话：{{user.phone}}</h2>
+                <h2 class="phone">用户电子邮件：{{user.email}}</h2>
+                {%if user._id == userinfo._id%}
+                    <a class="link" href="/user/userchange?id={{userinfo._id}}">修改个人信息 &gt;</a>
+                {%endif%} 
+            {%endfor%}             
+        </div>       
+    </div>
+    <div class="detail">        
+        <ul class="detail_list clearfix">
+            {%if user[0]._id == userinfo._id%}
+                <li class="ft">我的评论</li>
+            {%else%}
+                <li class="ft">他的评论</li>
+            {%endif%} 		
+                        
+        </ul>
+        <div class="detail_info">
+            <div class="rev">
+                <ul class="revlist">
+                    {%for co in comment %}
+                    {%for it in co.items %}
+                    <li>
+                        <div class="info-mod">
+                            <a href="/goodsinfo?id={{it._id}}&&user={{userinfo._id}}">
+                                <span class="author">{{it.title}}</span>
+                            </a>
+                        </div>
+                        <br>
+                        <div class="word">
+                            <a href="/pingjia?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=userinfo" class="dianping">
+                                <span class="words">{{co.content}}</span>
+                            </a>
+                        </div>
+                        <div class="panel">
+                            <span class="date">{{helper.formatTime(co.add_time)}}</span>
+                            <div class="pzc">
+                                <a href="/pingjia?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=userinfo" class="dianping" target="view_window">
+                                    <div class="glyphicon glyphicon-comment" style="color: #333333;"></div>
+                                    <em>{{co.ping}}</em>
+                                </a>  
+                                <a href="/dianzan/add?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=userinfo" class="dianzan">
+                                    <div class="glyphicon glyphicon-thumbs-up"></div>
+                                    <em>{{co.zan}}</em>
+                                </a>
+                                {%if co.user_id == userinfo._id%}
+                                <div style="float: right;">
+                                    <span><a style="color: red;" href="/comment/delete?id={{co._id}}&&user={{userinfo._id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</a></span>
+                                </div> 
+                                {%endif%}  
+                            </div>                        
+                        </div>
+                    </li>            
+                    {%endfor%}
+                    {%endfor%}
+                </ul>
+            </div>
+        </div> 
+        <div class="clear"></div>
+    </div>
+{% endblock %}

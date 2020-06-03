@@ -1,0 +1,42 @@
+{% include '../public/base_cssjs.html' %}
+
+<div class="panel panel-default">              
+        <div class="panel-heading">
+            添加广告图
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive input-form">
+                <form action="/admin/advertise/doAdd?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+                    <ul>
+                        <li>  分　　类: 
+                            <select name="type" id="type">
+                                <option value="1">网站</option>
+                                <option value="2">APP</option>
+                                <option value="3">小程序</option>
+                            </select>
+                        </li>
+                        <li>  名　　称: <input type="text" name="title"/></li>
+                        <li>  跳转地址: <input type="text" name="link"/></li>
+                        <li>  广 告 图: <input type="file" name="advertise_img"/></li>
+                        <li>  级    别: 
+                                <select name="level" id="level">
+                                    <option value="1">一级广告</option>
+                                    <option value="2">二级广告</option>
+                                </select>
+                         </li>
+                        <li>  排　　序: <input type="text" name="sort" value="1000"/></li>
+                        <li>  状　　态:
+                             <input type="radio" name="status" checked value="1" id="a"/> 
+                            <label for="a">显示</label>   
+                             <input type="radio" name="status" value="0" id="b"/>
+                             <label for="b">隐藏</label> 　
+                        </li>
+                        <li>
+                            <br/>
+                            <button type="submit" class="btn btn-default">提 交</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+</div>

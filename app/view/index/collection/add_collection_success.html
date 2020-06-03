@@ -1,0 +1,23 @@
+
+	{% extends "../public/base.html" %}
+
+	{% block cssjs%}
+	<link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+	{% endblock %}
+	
+	{% block content %}
+		<!-- 导航 -->
+		{% include '../public/nav.html'%}
+		<div class="addcart_success">
+			<div class="content"> 
+				<h3>已成功加入收藏╭(●｀∀´●)╯！</h3> 
+				<img src="{{img}}">
+				<br>
+				<span class="name">{{title}}</span> 
+			</div>
+			<div class="actions">
+				<a href="/goodsinfo?id={{goods_id}}&&user={{userinfo._id}}" class="btn btn-gocart">返回上一层</a>				
+				<a href="/collection?userinfo={{userinfo._id}}" class="btn btn-gocart">去收藏界面</a>
+			</div>
+		</div>
+	{% endblock %}

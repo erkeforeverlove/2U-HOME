@@ -1,0 +1,43 @@
+
+    {% include '../public/base_cssjs.html' %} 
+    <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="th">
+                    <th>管理员名称</th>
+                    <th>管理员电话</th>
+                    <th>管理员邮箱</th>
+                    <th>管理员角色</th>
+                                    
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%if userinfo.is_super==1%}
+                    <tr>
+                        <td>{{superman.username}}</td>
+                        <td>{{superman.mobile}}</td>
+                        <td>{{superman.email}}</td>
+                        <td>超级管理员</td>                      
+                        <td class="text-center text">
+                            <a href="/admin/manager/edit?id={{superman._id}}">修改</a>　　
+                            <a href="/admin/manager/delete?id={{ superman._id }}">删除</a>
+                        </td>
+                    </tr>
+                    {%endif%}
+                    {% for item in items %}                                           
+                        <tr>                            
+                            <td>{{item.username}}</td>
+                            <td>{{item.mobile}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.role[0].title}}</td>                      
+                            <td class="text-center text">
+                                <a href="/admin/manager/edit?id={{item._id}}">修改</a>　　
+                                <a href="/admin/manager/delete?id={{ item._id }}">删除</a>
+                            </td>
+                        </tr>    
+                    {% endfor %}                   
+                </tbody>
+            </table>
+    </div>
+

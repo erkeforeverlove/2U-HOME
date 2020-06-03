@@ -1,0 +1,68 @@
+{% include '../public/base_cssjs.html' %}
+<script src="/public/admin/js/jqPaginator.js"></script>
+    
+<div class="panel panel-default">              
+        <div class="panel-heading clear">
+            <span>文章分类列表</span> 
+            <a href="/admin/article/add" class="pull-right">增加文章</a>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>文章名称</th>
+                            <th>文章图片</th>                                
+                            <th>所属分类</th>   
+                            <th>增加日期</th>   
+                            <th class="text-center">排序</th> 
+                            <th class="text-center">状态</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for article in articles%}
+                        <tr>
+                                <td>{{article.title}}</td>      
+                                <td><img class="pic" src="{{article.article_img}}" /></td> 
+                                {% for art in article.articleCategory %}           
+                                    <td {%if article.cate_id.toString()!=art._id.toString() %} style="display:none" {% endif %} >{{art.title}}</td>   
+                                {% endfor %}   
+                                <td>{{helper.formatTime(article.add_time)}}</td>         
+                                <td class="text-center"><span >{{article.sort}}</span></td>
+                                <td class="text-center">
+                                    {%if article.status==1 %}
+                                        <span class="glyphicon glyphicon-ok icon-color-green"  />
+                                    {%else%}
+                                        <span class="glyphicon glyphicon-remove icon-color-red"  />
+                                    {%endif%}       
+                                </td>                                                                    
+                                <td class="text-center">　
+                                    <a href="/admin/article/edit?id={{article._id}}">修改</a>　
+                                    <a class="delete" href="/admin/article/delete?id={{article._id}}">删除</a>
+                                </td>
+                        </tr>            
+                        {%endfor%}
+                    </tbody>
+                </table>
+
+
+                <div id="page" class="pagination fr"></div>
+            </div>
+        </div>
+</div>
+
+<script>
+
+    $('#page').jqPaginator({
+        totalPages: {{totalPages}},
+        visiblePages: 8,
+        currentPage:  {{page}},
+        onPageChange: function (num, type) {
+            console.log('当前第' + num + '页',type);
+            if(type=='change'){
+            location.href="/admin/article?page="+num;
+            }
+        }
+    });
+</script>

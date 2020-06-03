@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户登录</title>
+		<link rel="stylesheet" href="/public/admin/css/login.css"> 
+	</head>
+	<body>
+		<div class="container">
+			<div class="form">
+					<div class="login">			
+						<div class="login_center">
+							<div class="login_top">
+								<div class="left fl">2U-HOME 后台登录</div>
+								<div class="clear"></div>
+								<div class="line center"></div>
+							</div>
+							<form class="login_main center" action="/admin/doLogin" method="post">
+								<input type="hidden" name="_csrf" value="{{csrf}}" /> 
+								<div class="username">用户名：<input class="shurukuang" id="username" type="text" name="username" placeholder="请输入账号"/></div>
+								<div class="username">密　码：<input class="shurukuang"  id="password"  type="password" name="password" placeholder="请输入密码"/></div>
+								<div class="username">
+									<div class="left fl">验证码：<input class="yanzhengma" id="verify" type="text" name="code" placeholder="请输入验证码"/></div>
+									<div class="right fl">
+										<img  id="verify_img" src="/admin/verify"  title="看不清？点击刷新" onclick="javascript:this.src='/admin/verify?mt='+Math.random()">				
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="login_submit">
+									<input class="submit" type="submit" name="dosubmit" value="立即登录"></input>
+								</div>
+							</form>
+						</div>
+					</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+    {% include '../public/base_cssjs.html' %}
+    <script src="/public/admin/js/jqPaginator.js"></script>
+   
+    <div class="panel panel-default">              
+            <div class="panel-heading clear">
+                    <span>用户列表</span>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="th">
+                                <th>用户头像</th>
+                                <th>用户名称</th> 
+                                <th>用户昵称</th> 
+                                <th>用户电话号</th>                              
+                                <th>用户申请时间</th>                         
+                                <th class="text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                {% for user in userArray %}
+                                        <tr>
+                                            {%if user.img %}
+                                            <td><img src="{{user.img}}" class="pic" height="80px" ></td>
+                                            {%else%}
+                                            <td><img src="/public/index/image/未上传.jpg" class="pic" height="80px"></td>
+                                            {%endif%}
+                                            <td>{{user.name}}</td>  
+                                            <td>{{user.nicheng}}</td> 
+                                            <td>{{user.phone}}</td>  
+                                            <td>{{helper.formatTime(user.add_time)}}</td>                                                                                                                               
+                                            <td class="text-center">　
+                                                <a href="/admin/user/edit?id={{user._id}}">修改</a>　
+                                                <a class="delete" href="/admin/user/delete?id={{user._id}}">删除</a>
+                                            </td>
+                                        </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                    <div id="page" class="pagination fr"></div>
+                </div>
+            </div>
+    </div>
+    <script>
+        $('#page').jqPaginator({
+                totalPages: {{totalPages}},
+                visiblePages: 8,
+                currentPage:  {{page}},
+                onPageChange: function (num, type) {
+                    if(type=='change'){
+                        location.href="/admin/user?page="+num;
+                    }
+                }
+        });
+   </script>

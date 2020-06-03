@@ -1,0 +1,58 @@
+{% extends "../public/base.html" %}
+
+{% block cssjs%}
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <script src="/public/index/js/jquery-1.10.1.js"></script>		
+    <script src="/public/index/js/base.js"> </script>
+    <link rel="stylesheet" href="/public/index/css/swiper.min.css">
+    <script src="/public/index/js/swiper.min.js"></script>
+    <style>
+        .article{
+            width:100%;
+            min-height:600px;
+            margin: 20px 0;
+        }
+
+        .line{
+            width: 100%;
+            height: 1px;
+            color:#eeeeee;
+        }
+
+        .title{
+            margin: 20px auto;
+            font-weight: bold;
+            color:#424242;
+            font-size:30px;
+            margin: 30px;
+        }
+
+        .content{
+            text-align: left;
+            font-size:20px;
+            text-indent:50px
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+    {% include '../public/nav.html'%}
+    <div class="article">
+        <div class="title">{{art.title}}</div>
+        <div class="line"></div>
+        <div class="content">{{art.content | safe}}</div>
+    </div>
+   
+</div>
+    <script>
+        $(function(){
+            $('#addCart').click(function(){
+                var goods_id=$('#addCart').attr('goods_id');
+             
+                location.href="/addCart?goods_id="+goods_id;
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% include '../public/base_cssjs.html' %}
+
+
+    <div class="panel panel-default">              
+        <div class="panel-heading">
+            修改用户信息
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive input-form">
+                <form action="/admin/user/doEdit?_csrf={{csrf}}" method="post" enctype="multipart/form-data">
+                    <ul class="form_input">
+                        <input type="hidden" name="_csrf" value="{{csrf}}">
+                        <input type="hidden" name="_id" value="{{user._id}}"/>
+                        <input type="hidden" name="prevPage" value="{{prevPage}}"/>
+                        {% if user.img %}
+                        <li> <span>头像图片:</span>  <input type="file" name="img"/>
+                            <img class="pic" src="{{user.img}}" height="80px"/> 
+                        </li>
+                        {% else %}
+                        <li> <span>头像图片:</span>  <input type="file" name="img"/>
+                            <img src="/public/index/image/未上传.jpg" class="pic" height="80px"> 
+                        </li>
+                        {% endif %} 
+                        <li>  <span>用户姓名:</span> <input type="text" name="name" value="{{user.name}}"/></li>
+                        <li>  <span>用户昵称:</span> <input type="text" name="nicheng" value="{{user.nicheng}}"/></li>
+                        <li>  <span>用户所在地:</span> <input type="text" name="area" value="{{user.area}}"/></li>
+                        <li>  <span>用户座右铭:</span> <br><textarea rows="5" cols="50" name="Motto" placeholder="" style="resize: none;">{{user.Motto}}</textarea>
+                        <li>  <span>用户电子邮件:</span> <input type="text" name="email" value="{{user.email}}"/></li>
+                        <li>  <span>用户电话号:</span> <input type="text" name="phone" value="{{user.phone}}"/></li>
+                        <li>  <span>用户密码:</span> <input type="password" name="password" value=""/></li>  
+                        <li>
+                            <br/>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>

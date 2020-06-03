@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>2U-Home</title>
+		{% block cssjs %}
+			 <!-- 自定义css js  -->
+		{% endblock %}
+	</head>
+	<body>
+		<!-- 顶部 -->
+		{% block header%}
+			{% include './header.html'%}
+		{% endblock %}
+		<!-- 主体内容 -->
+        {% block  content %}
+		{% endblock %}
+		
+		<!-- 底部 -->
+		{% include './footer.html'%}
+  	</body>
+</html>

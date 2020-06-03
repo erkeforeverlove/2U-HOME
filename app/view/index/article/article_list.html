@@ -1,0 +1,27 @@
+{% extends "../public/base.html" %}
+
+{% block cssjs %}
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+    {% include '../public/nav.html' %}
+
+	<div class="article_list">
+			<div class="content">
+				{%for art in article%}
+				<a href="/articleinfo?id={{art._id}}">
+					
+					<div class="item fl">
+						<img class="article_img" src="{{art.article_img}}" alt="">
+						<div class="title">{{art.title}}</div>
+						<div class="price">{{art.description}}</div>
+					</div>
+				</a>
+				{%endfor%}
+				<div class="clear"></div>
+			</div>
+		</div>
+
+{% endblock %}

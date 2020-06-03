@@ -1,0 +1,222 @@
+{% extends "../public/base.html" %}
+
+{% block cssjs%}
+    <link rel="stylesheet" type="text/css" href="/public/index/css/style.css">
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.min.css">
+    <script src="/public/index/js/jquery-1.10.1.js"></script>		
+    <script src="/public/index/js/base.js"> </script>
+    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/index/css/swiper.min.css">
+    <script src="/public/index/js/swiper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/index/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/public/index/css/font-awesome.min.css">
+    <script type="text/javascript" src="/public/index/js/nav.js"></script>
+    <style type="text/css">
+        body{
+            padding:0;
+            margin:0;
+            background: #f2f2f2;
+        }
+        .wrap .line{
+            height: 500px;
+            width: 188px;
+            margin:0 auto;
+        }
+        .info-mod{
+            border-radius: 15px;
+            background-color: rgba(94, 5, 238, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .word{
+            border-radius: 5px;
+            background-color: rgba(238, 5, 141, 0.555);
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+            line-height: 20px;
+        }
+        .info-img{
+            border-radius: 50%;
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        }
+        .panel{
+            -moz-box-shadow:2px 2px 10px #333333; 
+            -webkit-box-shadow:2px 2px 10px #333333; 
+            box-shadow:2px 2px 10px #333333;
+        } 
+    </style>		
+  
+    
+{% endblock %}
+
+{% block content %}
+	<!-- 导航 -->
+    {% include '../public/nav.html'%}
+    
+    <div class="basic_info">
+            <div class="placeordrer">
+                {%if cunzai==1%}
+                <input class="addCart" type="button" value="&#9733;" style="font-size:40px;"/>
+                {%else%}
+                <input class="addCart" type="button" name="addCart" id="addCart" value="&#9734;" style="font-size:40px;" goods_id="{{productInfo._id}}" user="{{userinfo._id}}" />
+                {%endif%}
+            </div>
+            <div class="left fl ">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <img src="{{productInfo.goods_img}}">
+                    </div>
+                </div>
+            </div>
+            <div class="right fl">
+                <div class="price">房源名称：{{productInfo.title}}</div>
+                <div class="price">价格：{{productInfo.price}}</div>
+                {%if productInfo.cate_id == "5e75bcf95b19194798cf9ce3" %}
+					<div class="price">开盘日期：{{productInfo.open_time}}</div>
+				{%else%}
+					<div class="price">上架日期：{{productInfo.open_time}}</div>
+				{%endif%}
+                <div class="price">户型：{{productInfo.house_huxing}}</div>
+                <div class="price">地址：{{productInfo.address}}</div>
+                {%if productInfo.cate_id == "5e75bcf95b19194798cf9ce3" %}
+                    <div class="price">楼盘电话：{{productInfo.house_tel}}</div>
+				{%else%}
+					
+				{%endif%}
+                <div class="price">销售员：{{sale.username}}</div>
+                <div class="price">销售员电话：{{sale.mobile}}</div>
+                <div class="price">销售员电子邮箱：{{sale.email}}</div>
+                
+                
+            </div>
+            <div class="clear"></div>
+    </div>
+ 
+    <div class="detail">
+            <ul class="detail_list clearfix">			
+                <li class="">详情描述</li>			
+                
+            </ul>
+            <div class="detail_info">
+                <div class="detail_info_item">
+                    <div class="content">
+                        {{productInfo.goods_content|safe}}
+                    </div>                       
+                </div>
+             
+            </div>
+    </div>
+    <div class="detail">        
+        <ul class="detail_list clearfix">		
+            <li class="ft">详细照片</li>			
+        </ul>
+        <div class="detail_info">
+            <div class="swiper-container">
+                <div class="swiper-wrapper" id="swiper-wrapper">
+                    {%for item in goodsImageResult %}
+                        <div class="swiper-slide">
+                            <img src="{{item.img_url}}">
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="detail">        
+        <ul class="detail_list clearfix">		
+            <li class="ft">用户评论</li>			
+        </ul>
+        <div class="detail_info">
+            <div class="rev">
+                <ul class="revlist">
+                    {%for co in comment %}
+                    {%for it in co.items %}                 
+                    <li>
+                        {%if it.img%}
+                        <div class="info-img">
+                            <a href="/user/userinfo?id={{it._id}}">
+                            <img src="{{it.img}}" style="border-radius: 50%;" width="80px" height="80px">
+                            </a>
+                        </div>
+                        {%else%}
+                        <div class="info-img">
+                            <a href="/user/userinfo?id={{it._id}}">
+                            <img src="/public/index/image/未上传.jpg" style="border-radius: 50%;" width="80px" height="80px">
+                            </a>
+                        </div>
+                        {%endif%}
+                        <div class="info-mod">
+                            <a href="/user/userinfo?id={{it._id}}">
+                                <span class="author">{{it.nicheng}}</span>
+                            </a>
+                        </div>
+                        <br>
+                        <div class="word">
+                            <span class="words">{{co.content}}</span>
+                        </div>
+                        <div class="panel">
+                            <span class="date">{{helper.formatTime(co.add_time)}}</span>
+                            
+                            <div class="pzc">
+                                <a href="/pingjia?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=goodsinfo" class="dianping" target="view_window">
+                                    <div class="glyphicon glyphicon-comment" style="color: #333333;"></div>
+                                    <em>{{co.ping}}</em>
+                                </a>      
+                                <a href="/dianzan/add?id={{co.goods_id}}&&user={{userinfo._id}}&&co_id={{co._id}}&&page=goodsinfo" class="dianzan">                                                        
+                                    <div class="glyphicon glyphicon-thumbs-up"></div>                
+                                    <em>{{co.zan}}</em>    
+                                </a>
+                            </div>
+                        </div>
+                    </li>                              
+                    {%endfor%}
+                    {%endfor%}
+                </ul>
+            </div>
+        </div> 
+        <div class="clear"></div>
+    </div>
+    <div class="basic_pingjia">
+        <div class="placeordrer">
+            <input class="addPingjia" type="button" name="addPingjia" id="addPingjia" value="我要点评" goods_id="{{productInfo._id}}" user="{{userinfo._id}}" />
+        </div>
+    </div>
+    <div class="leftNav-item">
+        <ul>
+            <li title="在线客服">
+                <i class="fa fa-comments-o"></i>             
+                <a href="/kefu/index?id={{userinfo._id}}"class="rota">问题反馈</a>
+                
+            </li> 
+            <li lay-data="img" data-fooc="/public/index/image/二维码.png">
+                <i class="fa fa-money"></i><a href="javascript:;" class="rota">二维码</a>
+            </li> 
+            <li title="返回顶部" class="for-top">
+                <i class="fa fa-arrow-up"></i>
+                <a href="javascript:;" class="rota">去顶部</a>
+            </li>
+        </ul>
+    </div>
+  
+    <script>
+        
+        $(function(){
+            $('#addCart').click(function(){
+                var goods_id=$('#addCart').attr('goods_id');
+                var user=$('#addCart').attr('user');     
+                location.href="/addCollection?goods_id="+goods_id+"&&userinfo="+user;
+            })
+        })
+        $(function(){
+            $('#addPingjia').click(function(){
+                var goods_id=$('#addPingjia').attr('goods_id');
+                var user=$('#addPingjia').attr('user');     
+                location.href="/comment?goods_id="+goods_id+"&&userinfo="+user+"&&page=goodsinfo";
+            })
+        })
+    </script>
+{% endblock %}

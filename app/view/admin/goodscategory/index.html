@@ -1,0 +1,67 @@
+{% include '../public/base_cssjs.html' %}
+
+<div class="panel panel-default">
+        <div class="panel-heading clear">
+            <span>商品分类列表</span> 
+            <a href="/admin/goodsCategory/add" class=" pull-right">增加商品分类</a>
+        </div>
+        <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="th">
+                        <th>分类名称</th>
+                        <th>跳转地址</th>                                
+                        <th class="text-center">排序</th> 
+                        <th class="text-center">状态</th>                                           
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for category in categorys%}
+                        <tr>
+                            <td>{{category.title}}</td>  
+
+                            <td><span>{{category.link}}</span></td>
+                            <td class="text-center">
+                                <span>{{category.sort}}</span>
+                            </td>
+                            <td class="text-center">
+                                {%if category.status==1 %}
+                                <span class="glyphicon glyphicon-ok icon-color-green"  />
+                                {%else%}
+                                <span class="glyphicon glyphicon-remove icon-color-red"  />
+                                {%endif%}
+                            </td>                                                                    
+                            <td class="text-center">　
+                                <a href="/admin/goodsCategory/edit?id={{category._id}}">修改</a>　
+                                <a class="delete" href="/admin/goodsCategory/delete?id={{category._id}}">删除</a>
+                            </td>
+                        </tr>
+                        {%for item in category.items %}
+                            <tr>
+                                    <td>------{{item.title}}</td>  
+                                    <td>
+                                        <span>{{item.link}}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span>{{item.sort}}</span></td>
+                                    <td class="text-center">
+                                        {%if category.status==1 %}
+                                        <span class="glyphicon glyphicon-ok icon-color-green"  />
+                                        {%else%}
+                                        <span class="glyphicon glyphicon-remove icon-color-red"  />
+                                        {%endif%}
+                                    </td>                                                                    
+                                    <td class="text-center">　
+                                        <a href="/admin/goodsCategory/edit?id={{item._id}}">修改</a>　
+                                        <a class="delete" href="/admin/goodsCategory/delete?id={{item._id}}">删除</a>
+                                    </td>
+                            </tr>
+                        {% endfor %}
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

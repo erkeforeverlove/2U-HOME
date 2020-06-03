@@ -1,0 +1,36 @@
+<footer>	
+
+        <div class="div1">
+            <h4>关于作者</h4>
+            {%for itemBottomNav in bottomNav %}	
+                    {% if loop.index >6 and loop.index <10 %}					
+                    <a href="{{itemBottomNav.link}}" target="{% if itemBottomNav.is_opennew==1%}_self{%else%} _blank{%endif%}">
+                        <span>{{itemBottomNav.title}}</span>
+                    </a><br/>
+                    {%endif%}
+            {%endfor%}
+        </div>
+
+        <div class="div2">
+            <h4>客户服务</h4>
+            {%for itemBottomNav in bottomNav %}	
+                    {% if loop.index <4 %}					
+                    <a href="{{itemBottomNav.link}}" target="{% if itemBottomNav.is_opennew==1%}_self{%else%} _blank{%endif%}">
+                        <span>{{itemBottomNav.title}}</span>
+                    </a><br/>
+                    {%endif%}
+            {%endfor%}
+        </div> 
+
+        <div class="div3">
+            <h4>友情链接</h4>
+            {%for itemBottomNav in bottomNav %}	
+                    {% if loop.index >3 and loop.index <7 %}					
+                    <a href="{{itemBottomNav.link}}" target="{% if itemBottomNav.is_opennew==1%}_self{%else%} _blank{%endif%}">
+                        <span>{{itemBottomNav.title}}</span>
+                    </a><br/>
+                    {%endif%}
+            {%endfor%}
+        </div>
+
+</footer>

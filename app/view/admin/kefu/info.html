@@ -1,0 +1,17 @@
+{% include '../public/base_cssjs.html' %}
+
+
+    <div class="panel panel-default">              
+        <div class="panel-heading">
+            查看反馈信息
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive input-form">
+                    <ul>
+                        <li>  <span>反馈人姓名:</span> <input type="text" name="name" value="{{item.name}}"/></li>
+                        <li>  <span>反馈人联系方式:</span> <input type="text" name="phone" value="{{item.phone}}"/></li>
+                        <li>  <span>反馈信息:</span> <br><textarea rows="10" cols="50" name="content" placeholder="">{{item.content}}</textarea>
+                    </ul>          
+            </div>
+        </div>
+    </div>
